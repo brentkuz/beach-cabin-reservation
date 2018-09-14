@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BeachCabinReservation.Crosscutting\BeachCabinReservation.Crosscutting.csproj" />
+    <ProjectReference Include="..\BeachCabinReservation.Data\BeachCabinReservation.Data.csproj" />
+  </ItemGroup>
+
+</Project>

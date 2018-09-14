@@ -20,4 +20,9 @@
     <Folder Include="wwwroot\vendor\lodash\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\BeachCabinReservation.Business\BeachCabinReservation.Business.csproj" />
+    <ProjectReference Include="..\BeachCabinReservation.Crosscutting\BeachCabinReservation.Crosscutting.csproj" />
+  </ItemGroup>
+
 </Project>
