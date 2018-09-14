@@ -20,6 +20,12 @@ var deps = {
     },
     "lodash": {
         "lodash.*": ""
+    },
+    "moment": {
+        "min/*": ""
+    },
+    "fullcalendar": {
+        "dist/**/*": ""
     }
 }
 
