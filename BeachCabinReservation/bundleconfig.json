@@ -9,9 +9,24 @@
     ]
   },
   {
+    "outputFileName": "wwwroot/dist/common.min.js",
+    "inputFiles": [
+      "wwwroot/source/global.js",
+      "wwwroot/source/utility.js",
+      "wwwroot/source/app.js"
+    ],
+    // Optionally specify minification options
+    "minify": {
+      "enabled": true,
+      "renameLocals": true
+    },
+    // Optionally generate .map file
+    "sourceMap": false
+  },
+  {
     "outputFileName": "wwwroot/dist/home-index.min.js",
     "inputFiles": [
-      "wwwroot/source/home-index.js"
+      "wwwroot/source/home/index.js"
     ],
     // Optionally specify minification options
     "minify": {
