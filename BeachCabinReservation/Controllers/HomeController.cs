@@ -2,11 +2,17 @@
 using Microsoft.AspNetCore.Mvc;
 using BeachCabinReservation.Models;
 using BeachCabinReservation.Models.Home;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BeachCabinReservation.Controllers
 {
-    public class HomeController : Controller
+    [Authorize]
+    public class HomeController : BaseController<HomeController>
     {
+
+        public HomeController(ILogger<HomeController> logger) : base(logger) { }
+
         public IActionResult Index()
         {
             var vm = new IndexViewModel

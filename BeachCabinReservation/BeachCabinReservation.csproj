@@ -1,21 +1,20 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <Configurations>Debug;Release;Development</Configurations>
     <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
     <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="2.1.1" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.1" />
   </ItemGroup>
 
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
-  </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Areas\Identity\Services\" />
     <Folder Include="wwwroot\dist\" />
     <Folder Include="wwwroot\vendor\" />
     <Folder Include="wwwroot\vendor\lodash\" />
@@ -24,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\BeachCabinReservation.Business\BeachCabinReservation.Business.csproj" />
     <ProjectReference Include="..\BeachCabinReservation.Crosscutting\BeachCabinReservation.Crosscutting.csproj" />
+    <ProjectReference Include="..\BeachCabinReservation.Data\BeachCabinReservation.Data.csproj" />
   </ItemGroup>
 
 </Project>
