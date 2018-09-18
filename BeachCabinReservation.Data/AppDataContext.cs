@@ -17,6 +17,7 @@ namespace BeachCabinReservation.Data
         }
 
         public DbSet<LogEntry> LogEntries { get; set; }
+        public DbSet<CalendarEvent> CalendarEvents { get; set; }
 
         public override int SaveChanges()
         {

@@ -4,14 +4,16 @@ using BeachCabinReservation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeachCabinReservation.Data.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180918030315_Added_CalendarEvent")]
+    partial class Added_CalendarEvent
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

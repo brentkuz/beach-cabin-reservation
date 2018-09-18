@@ -12,6 +12,19 @@
                 center: 'addEvent',
                 right: 'agendaWeek,month today prev,next'
             },
+            events: [
+                {
+                    title: "event 1",
+                    start: "2018-09-25",
+                    allDay: true,
+                    backgroundColor: "green"
+                },
+                {
+                    title: "event 2",
+                    start: "2018-09-18T10:00:00",
+                    end: "2018-09-20T12:00:00"
+                }
+            ],
             customButtons: {
                 addEvent: {
                     text: "New Reservation",
@@ -26,18 +39,10 @@
                 }
                 $("#calendar").fullCalendar("gotoDate", day);
             },
-            events: [
-                {
-                    title: "event 1",
-                    start: "2018-09-25",
-                    allDay: true
-                },
-                {
-                    title: "event 2",
-                    start: "2018-09-18T10:00:00",
-                    end: "2018-09-20T12:00:00"
-                }
-            ]
+            eventClick: function (event, jsEvent, view) {
+                alert("clicked event")
+            },
+
         })
 
     });
