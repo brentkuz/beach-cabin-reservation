@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeachCabinReservation.Data.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20180916234146_init")]
-    partial class init
+    [Migration("20180919022726_Add_WaitList")]
+    partial class Add_WaitList
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,6 +28,8 @@ namespace BeachCabinReservation.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<string>("Color");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
@@ -39,6 +41,8 @@ namespace BeachCabinReservation.Data.Migrations
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
+
+                    b.Property<string>("Name");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -72,6 +76,39 @@ namespace BeachCabinReservation.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("BeachCabinReservation.Data.Entities.CalendarEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("CalendarEventId");
+
+                    b.Property<DateTime?>("Created");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsAllDay");
+
+                    b.Property<bool>("IsWaitListEvent");
+
+                    b.Property<DateTime?>("Modified");
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CalendarEventId");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("CalendarEvents");
+                });
+
             modelBuilder.Entity("BeachCabinReservation.Data.Entities.LogEntry", b =>
                 {
                     b.Property<int>("Id")
@@ -80,8 +117,6 @@ namespace BeachCabinReservation.Data.Migrations
 
                     b.Property<DateTime?>("Created");
 
-                    b.Property<string>("CreatedBy");
-
                     b.Property<int>("Level");
 
                     b.Property<string>("Message")
@@ -89,14 +124,12 @@ namespace BeachCabinReservation.Data.Migrations
 
                     b.Property<DateTime?>("Modified");
 
-                    b.Property<string>("ModifiedBy");
-
                     b.HasKey("Id");
 
                     b.ToTable("LogEntries");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2018, 9, 16, 16, 41, 46, 43, DateTimeKind.Local), CreatedBy = "test", Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 16, 16, 41, 46, 45, DateTimeKind.Local), ModifiedBy = "test" }
+                        new { Id = 1, Created = new DateTime(2018, 9, 18, 19, 27, 25, 624, DateTimeKind.Local), Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 18, 19, 27, 25, 626, DateTimeKind.Local) }
                     );
                 });
 
@@ -212,6 +245,17 @@ namespace BeachCabinReservation.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BeachCabinReservation.Data.Entities.CalendarEvent", b =>
+                {
+                    b.HasOne("BeachCabinReservation.Data.Entities.CalendarEvent")
+                        .WithMany("WaitList")
+                        .HasForeignKey("CalendarEventId");
+
+                    b.HasOne("BeachCabinReservation.Data.Entities.AppUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

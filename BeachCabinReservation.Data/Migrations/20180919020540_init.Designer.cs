@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BeachCabinReservation.Data.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    [Migration("20180918030315_Added_CalendarEvent")]
-    partial class Added_CalendarEvent
+    [Migration("20180919020540_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -76,6 +76,37 @@ namespace BeachCabinReservation.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("BeachCabinReservation.Data.Entities.CalendarEvent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("Created");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<bool>("IsAllDay");
+
+                    b.Property<DateTime?>("Modified");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.Property<string>("OwnerId");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<string>("Title");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
+
+                    b.ToTable("CalendarEvents");
+                });
+
             modelBuilder.Entity("BeachCabinReservation.Data.Entities.LogEntry", b =>
                 {
                     b.Property<int>("Id")
@@ -100,7 +131,7 @@ namespace BeachCabinReservation.Data.Migrations
                     b.ToTable("LogEntries");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2018, 9, 17, 20, 3, 15, 571, DateTimeKind.Local), CreatedBy = "test", Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 17, 20, 3, 15, 573, DateTimeKind.Local), ModifiedBy = "test" }
+                        new { Id = 1, Created = new DateTime(2018, 9, 18, 19, 5, 40, 317, DateTimeKind.Local), CreatedBy = "test", Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 18, 19, 5, 40, 319, DateTimeKind.Local), ModifiedBy = "test" }
                     );
                 });
 
@@ -216,6 +247,13 @@ namespace BeachCabinReservation.Data.Migrations
                     b.HasKey("UserId", "LoginProvider", "Name");
 
                     b.ToTable("AspNetUserTokens");
+                });
+
+            modelBuilder.Entity("BeachCabinReservation.Data.Entities.CalendarEvent", b =>
+                {
+                    b.HasOne("BeachCabinReservation.Data.Entities.AppUser", "Owner")
+                        .WithMany()
+                        .HasForeignKey("OwnerId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

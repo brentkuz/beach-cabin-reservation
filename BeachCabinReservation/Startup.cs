@@ -1,4 +1,5 @@
-﻿using BeachCabinReservation.Data;
+﻿using BeachCabinReservation.Business.Services;
+using BeachCabinReservation.Data;
 using BeachCabinReservation.Data.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -74,11 +75,14 @@ namespace BeachCabinReservation
 
         private void ConfigureBusiness(IServiceCollection services)
         {
+            services.AddTransient<ICalendarService, CalendarService>();
         }
+
         private void ConfigureData(IServiceCollection services)
         {
             services.AddTransient<IUnitOfWork, UnitOfWork>();
             services.AddTransient<ILogEntryRepository, LogEntryRepository>();
+            services.AddTransient<ICalendarEventRepository, CalendarEventRepository>();
         }
     }
 }

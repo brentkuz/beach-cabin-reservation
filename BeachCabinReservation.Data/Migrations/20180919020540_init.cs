@@ -40,7 +40,9 @@ namespace BeachCabinReservation.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    Color = table.Column<string>(nullable: true),
+                    Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -171,10 +173,37 @@ namespace BeachCabinReservation.Data.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "CalendarEvents",
+                columns: table => new
+                {
+                    Created = table.Column<DateTime>(nullable: true),
+                    CreatedBy = table.Column<string>(nullable: true),
+                    Modified = table.Column<DateTime>(nullable: true),
+                    ModifiedBy = table.Column<string>(nullable: true),
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Title = table.Column<string>(nullable: true),
+                    IsAllDay = table.Column<bool>(nullable: false),
+                    Start = table.Column<DateTime>(nullable: false),
+                    End = table.Column<DateTime>(nullable: false),
+                    OwnerId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CalendarEvents", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CalendarEvents_AspNetUsers_OwnerId",
+                        column: x => x.OwnerId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.InsertData(
                 table: "LogEntries",
                 columns: new[] { "Id", "Created", "CreatedBy", "Level", "Message", "Modified", "ModifiedBy" },
-                values: new object[] { 1, new DateTime(2018, 9, 16, 16, 41, 46, 43, DateTimeKind.Local), "test", 2, "Initial test message", new DateTime(2018, 9, 16, 16, 41, 46, 45, DateTimeKind.Local), "test" });
+                values: new object[] { 1, new DateTime(2018, 9, 18, 19, 5, 40, 317, DateTimeKind.Local), "test", 2, "Initial test message", new DateTime(2018, 9, 18, 19, 5, 40, 319, DateTimeKind.Local), "test" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -214,6 +243,11 @@ namespace BeachCabinReservation.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CalendarEvents_OwnerId",
+                table: "CalendarEvents",
+                column: "OwnerId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -232,6 +266,9 @@ namespace BeachCabinReservation.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "CalendarEvents");
 
             migrationBuilder.DropTable(
                 name: "LogEntries");

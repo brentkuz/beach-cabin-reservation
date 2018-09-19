@@ -15,9 +15,12 @@ namespace BeachCabinReservation.Data.Entities
         public bool IsAllDay { get; set; }
         public DateTime Start { get; set; }
         public DateTime End { get; set; }
+        public bool IsWaitListEvent { get; set; }
 
         [ForeignKey("Owner")]
         public string OwnerId { get; set; }
         public AppUser Owner { get; set; }
+
+        public ICollection<CalendarEvent> WaitList { get; set; }
     }
 }

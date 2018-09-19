@@ -4,14 +4,16 @@ using BeachCabinReservation.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BeachCabinReservation.Data.Migrations
 {
     [DbContext(typeof(AppDataContext))]
-    partial class AppDataContextModelSnapshot : ModelSnapshot
+    [Migration("20180919022049_Removed_Fields_From_EntityBase")]
+    partial class Removed_Fields_From_EntityBase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -80,15 +82,11 @@ namespace BeachCabinReservation.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CalendarEventId");
-
                     b.Property<DateTime?>("Created");
 
                     b.Property<DateTime>("End");
 
                     b.Property<bool>("IsAllDay");
-
-                    b.Property<bool>("IsWaitListEvent");
 
                     b.Property<DateTime?>("Modified");
 
@@ -99,8 +97,6 @@ namespace BeachCabinReservation.Data.Migrations
                     b.Property<string>("Title");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CalendarEventId");
 
                     b.HasIndex("OwnerId");
 
@@ -127,7 +123,7 @@ namespace BeachCabinReservation.Data.Migrations
                     b.ToTable("LogEntries");
 
                     b.HasData(
-                        new { Id = 1, Created = new DateTime(2018, 9, 18, 19, 27, 25, 624, DateTimeKind.Local), Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 18, 19, 27, 25, 626, DateTimeKind.Local) }
+                        new { Id = 1, Created = new DateTime(2018, 9, 18, 19, 20, 48, 967, DateTimeKind.Local), Level = 2, Message = "Initial test message", Modified = new DateTime(2018, 9, 18, 19, 20, 48, 968, DateTimeKind.Local) }
                     );
                 });
 
@@ -247,10 +243,6 @@ namespace BeachCabinReservation.Data.Migrations
 
             modelBuilder.Entity("BeachCabinReservation.Data.Entities.CalendarEvent", b =>
                 {
-                    b.HasOne("BeachCabinReservation.Data.Entities.CalendarEvent")
-                        .WithMany("WaitList")
-                        .HasForeignKey("CalendarEventId");
-
                     b.HasOne("BeachCabinReservation.Data.Entities.AppUser", "Owner")
                         .WithMany()
                         .HasForeignKey("OwnerId");
